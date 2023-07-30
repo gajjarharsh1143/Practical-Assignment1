@@ -1,0 +1,16 @@
+{
+  "name": "question10",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start":"echo Server Script",
+    "test": "echo Test Script",
+    "uds1": "echo User-defined-1 Script",
+    "uds2": "echo User-defined-2 Script",
+    "uds3": "echo User-defined-3 Script"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

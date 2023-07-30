@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web-based Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #chatbox {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 50%;
+            margin: auto;
+        }
+
+        .message {
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 6px;
+            border-bottom: 2px solid black;
+        }
+
+        input[type="text"] {
+            width: 96.5%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chatbox">
+        <input type="text" id="userInput" placeholder="Ask to Jarvis">
+        <div id="chat"></div>
+    </div>
+    <script>
+        const chatbox = document.getElementById('chat');
+        const userInput = document.getElementById('userInput');
+
+        const socket = new WebSocket('ws://localhost:8000');
+
+        socket.onmessage = function (event) {
+            displayMessage("\u{1F916} : " + event.data);
+        };
+
+        userInput.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                const message = userInput.value.trim();
+                displayMessage("\u{1F464} : " + message);
+                socket.send(message);
+                userInput.value = '';
+            }
+        });
+
+        function displayMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.className = 'message';
+            chatbox.appendChild(messageDiv);
+        }
+    </script>
+</body>
+
+</html>
